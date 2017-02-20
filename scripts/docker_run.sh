@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "HELLO!"
+
 #
 # Intended for CI systems to use when running test suite or deploying.
 #

@@ -13,6 +13,5 @@ set -e
 # Build image and run
 echo "Start build"
 docker build -t jacekmarchwicki/android .
-$ cd /home/runner/android-semaphoreci-doker
 echo "start run"
-docker run --tty --interactive --volume=$(pwd):/app --workdir=/app --rm jacekmarchwicki/android:java7-8 /bin/sh -c "./gradlew build"
+docker run --tty --interactive --volume=$(pwd):/opt/workspace --workdir=/opt/workspace --rm jacekmarchwicki/android:java7-8 /bin/sh -c "./gradlew build"

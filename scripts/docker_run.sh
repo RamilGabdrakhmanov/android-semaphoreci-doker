@@ -10,19 +10,7 @@
 # Fail immediately
 set -e
 
-#
-# Local Docker engine may not have access to such sensitive paths, so we do not want
-# it linked when run locally. Note that if the script requires access (e.g. deploy.sh)
-# then this command will not work and you need to run it manually.
-#
-if [ $CI ]; then
-  CI_ARGS="-v $HOME/.ssh/id_rsa:/root/.ssh/id_rsa -v $HOME/.aws/credentials:/root/.aws/credentials"
-fi
 
 # Build image and run
-docker build -t sabre:1.0 .
-docker run --rm -it \
-       -v $PWD:/var/sabre \
-       $CI_ARGS \
-       -w /var/sabre sabre:1.0 \
-       $1
+docker build -t jacekmarchwicki/android:java7-8 .
+docker run --tty --interactive --volume=$(pwd):/opt/workspace --workdir=/opt/workspace --rm jacekmarchwicki/android:java7-8 /bin/sh -c "./gradlew build"

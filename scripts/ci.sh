@@ -8,6 +8,8 @@ set -e
 
 echo "!!!!CI BEGIN 3!!!!!"
 
+ls -a
+
 echo "!!!!CI BEGIN!!!!!"
 echo "!!!!CI BEGIN!!!!!"
 echo "!!!!CI BEGIN!!!!!"
@@ -16,5 +18,8 @@ echo "!!!!CI BEGIN!!!!!"
 echo "!!!!CI BEGIN!!!!!"
 echo "!!!!CI BEGIN!!!!!"
 
-#./gradlew test
-docker run --tty --interactive --volume=$(pwd):/opt/workspace --workdir=/opt/workspace --rm gfx/docker-android-project /bin/sh -c "./gradlew test"
+
+export ANDROID_HOME="/usr/local/android-sdk-linux"
+
+echo android home = $ANDROID_HOME
+./gradlew test

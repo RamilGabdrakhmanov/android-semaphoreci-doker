@@ -8,6 +8,7 @@ set -e
 
 echo "!!!!CI BEGIN 3!!!!!"
 
+echo andhome = $ANDROID_HOME
 
 echo "!!!!CI BEGIN!!!!!"
 echo "!!!!CI BEGIN!!!!!"

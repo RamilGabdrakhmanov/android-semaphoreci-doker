@@ -1,10 +1,6 @@
 #!/bin/bash
 
-# Fail fast
+# Fail immediately
 set -e
 
-# Install Sabre
-bundle install
-
-# Deploy
-bundle exec sabre apply bot acl-staging
+docker run --tty --interactive --volume=$(pwd):/opt/workspace --workdir=/opt/workspace --rm gfx/docker-android-project /bin/sh -c "./gradlew -PtestfairyChangelog=\"\$(git log -1 --pretty=%B)\"  testfairyStagingRelease"

@@ -1,5 +1,4 @@
 #!/bin/bash
-
 #
 # Intended for CI systems to use when running test suite or deploying.
 #
@@ -12,5 +11,4 @@ set -e
 
 
 # Build image and run
-docker build -t jacekmarchwicki/android:java7-8 .
-docker run --tty --interactive --volume=$(pwd):/opt/workspace --workdir=/opt/workspace --rm jacekmarchwicki/android:java7-8 /bin/sh -c "./gradlew build"
+docker build -t gfx/docker-android-project .

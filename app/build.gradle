@@ -1,35 +1,67 @@
 apply plugin: 'com.android.application'
 apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'robolectric'
+apply plugin: 'testfairy'
 
 android {
     compileSdkVersion COMPILE_SDK_VERSION
     buildToolsVersion BUILD_TOOLS_VERSION
+
     defaultConfig {
-        applicationId "ramil.androidsemaphorecidoker"
         minSdkVersion MIN_SDK_VERSION
         targetSdkVersion COMPILE_SDK_VERSION
+
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-    }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
     }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    productFlavors {
+        staging {
+            applicationId "ramil.androidsemaphorecidoker.staging"
+        }
+
+        production {
+            applicationId "ramil.androidsemaphorecidoker.production"
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    testfairyConfig {
+        apiKey "bff964eee9431a1614fa6a72ebf8e871ecddb37e"
+        testersGroups "testers"
+        notify true
+        autoUpdate false
+        uploadProguardMapping true
+    }
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
+
     compile "com.android.support:appcompat-v7:$SUPPORT_LIBRARY_VERSION"
-    androidTestCompile 'junit:junit:4.12'
+
+    androidTestCompile 'junit:junit:4.12' // java unit testing framework
+    androidTestCompile 'org.robolectric:robolectric:2.4' // android unit testing framework
+    androidTestCompile 'com.squareup:fest-android:1.0.8' // android fest assertions
+    androidTestCompile 'org.mockito:mockito-all:2.0.2-beta'
+}
+
+configurations {
+    androidTestCompile.exclude module: 'commons-logging'
+    androidTestCompile.exclude module: 'httpclient'
 }

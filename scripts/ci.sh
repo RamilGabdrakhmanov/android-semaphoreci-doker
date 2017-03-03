@@ -3,7 +3,4 @@
 # Fail immediately
 set -e
 
-cd services/bot
-
-npm install -s
-npm test
+docker run --tty --interactive --volume=$(pwd):/opt/workspace --workdir=/opt/workspace --rm gfx/docker-android-project /bin/sh -c "./gradlew test"

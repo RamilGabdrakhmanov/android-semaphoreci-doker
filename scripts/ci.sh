@@ -7,7 +7,6 @@ echo "!!!!CI BEGIN 2!!!!!"
 set -e
 
 echo "!!!!CI BEGIN 3!!!!!"
-cd app
 
 
 echo "!!!!CI BEGIN!!!!!"

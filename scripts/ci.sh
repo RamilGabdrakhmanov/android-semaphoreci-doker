@@ -8,8 +8,6 @@ set -e
 
 echo "!!!!CI BEGIN 3!!!!!"
 
-echo andhome = $ANDROID_HOME
-
 echo "!!!!CI BEGIN!!!!!"
 echo "!!!!CI BEGIN!!!!!"
 echo "!!!!CI BEGIN!!!!!"
@@ -18,4 +16,5 @@ echo "!!!!CI BEGIN!!!!!"
 echo "!!!!CI BEGIN!!!!!"
 echo "!!!!CI BEGIN!!!!!"
 
-./gradlew test
+#./gradlew test
+docker run --tty --interactive --volume=$(pwd):/opt/workspace --workdir=/opt/workspace --rm gfx/docker-android-project /bin/sh -c "./gradlew test"

@@ -17,6 +17,6 @@ public class SimpleTest {
     }
 
     @Test public void testNotEmpty() {
-        assertThat(Boolean.TRUE).isTrue();
+        assertThat(!Boolean.TRUE).isTrue();
     }
 }

@@ -1,37 +1,32 @@
-FROM ubuntu:14.04
+# based on https://registry.hub.docker.com/u/samtstern/android-sdk/dockerfile/ with openjdk-8
+FROM openjdk:8
 
-MAINTAINER Jacek Marchwicki "jacek.marchwicki@gmail.com"
+MAINTAINER Ramil Gabdrakhmanov  <ramil.ga>
 
-# Install java7
-RUN apt-get update && \
-  apt-get install -y software-properties-common && \
-  add-apt-repository -y ppa:webupd8team/java && \
-  (echo oracle-java7-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections) && \
-  apt-get update && \
-  apt-get install -y oracle-java7-installer && \
-  apt-get clean && \
-  rm -fr /var/lib/apt/lists/* /tmp/* /var/tmp/*
-ENV JAVA7_HOME /usr/lib/jvm/java-7-oracle
+ENV DEBIAN_FRONTEND noninteractive
 
-# Install java8
-RUN apt-get update && \
-  apt-get install -y software-properties-common && \
-  add-apt-repository -y ppa:webupd8team/java && \
-  (echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections) && \
-  apt-get update && \
-  apt-get install -y oracle-java8-installer && \
-  apt-get clean && \
-  rm -fr /var/lib/apt/lists/* /tmp/* /var/tmp/*
-ENV JAVA8_HOME /usr/lib/jvm/java-8-oracle
-ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
+# Install dependencies
+RUN dpkg --add-architecture i386 && \
+    apt-get update && \
+    apt-get install -yq libc6:i386 libstdc++6:i386 zlib1g:i386 libncurses5:i386 --no-install-recommends && \
+    apt-get clean
 
-# Install Deps
-RUN dpkg --add-architecture i386 && apt-get update && apt-get install -y --force-yes unzip expect git wget libc6-i386 lib32stdc++6 lib32gcc1 lib32ncurses5 lib32z1 python curl libqt5widgets5 && apt-get clean && rm -fr /var/lib/apt/lists/* /tmp/* /var/tmp/*
+# Download and install SDK
+ENV ANDROID_SDK_URL http://dl.google.com/android/android-sdk_r24.4.1-linux.tgz
+RUN curl -L "${ANDROID_SDK_URL}" | tar --no-same-owner -xz -C /usr/local
+ENV ANDROID_HOME /usr/local/android-sdk-linux
+ENV ANDROID_SDK /usr/local/android-sdk-linux
+ENV PATH ${ANDROID_HOME}/tools:$ANDROID_HOME/platform-tools:$PATH
 
-# Copy install tools
-COPY tools /opt/tools
-ENV PATH ${PATH}:/opt/tools
+# Install Android SDK components
 
-# GO to workspace
-RUN mkdir -p /opt/workspace
-WORKDIR /opt/workspace
+# License Id: android-sdk-license-ed0d0a5b
+ENV ANDROID_COMPONENTS platform-tools,build-tools-21.1.2,android-21
+# License Id: android-sdk-license-5be876d5
+ENV GOOGLE_COMPONENTS extra-android-m2repository,extra-google-m2repository
+
+RUN echo y | android update sdk --no-ui --all --filter "${ANDROID_COMPONENTS}" ; \
+    echo y | android update sdk --no-ui --all --filter "${GOOGLE_COMPONENTS}"
+
+# Support Gradle
+ENV TERM dumb

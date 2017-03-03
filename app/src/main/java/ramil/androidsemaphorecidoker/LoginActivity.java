@@ -4,11 +4,13 @@ import android.app.Activity;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 
 /**
  * A login screen that offers login via email/password.
  */
 public class LoginActivity extends Activity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,7 +20,7 @@ public class LoginActivity extends Activity {
         Log.e("LoginActivity", getHello(getResources()));
     }
 
-    private String getHello(Resources resources) {
+    public String getHello(Resources resources) {
         ResFunction f = (res) -> res.getString(R.string.hello);
         return f.run(resources);
     }

@@ -34,4 +34,4 @@ ENV TERM dumb
 RUN apt-get clean
 
 RUN chown -R 1000:1000 $ANDROID_HOME
-VOLUME ["/usr"]
+VOLUME ["/usr/local/android-sdk-linux"]

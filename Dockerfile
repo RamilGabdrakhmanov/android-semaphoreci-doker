@@ -12,11 +12,12 @@ RUN dpkg --add-architecture i386 && \
     apt-get clean
 
 # Download and install SDK
-ENV ANDROID_SDK_URL http://dl.google.com/android/android-sdk_r24.4.1-linux.tgz
-RUN curl -L "${ANDROID_SDK_URL}" | tar --no-same-owner -xz -C /usr/local
-ENV ANDROID_HOME /usr/local/android-sdk-linux
-ENV ANDROID_SDK /usr/local/android-sdk-linux
-ENV PATH ${ANDROID_HOME}/tools:$ANDROID_HOME/platform-tools:$PATH
+RUN cd /opt && wget -q https://dl.google.com/android/android-sdk_r24.4.1-linux.tgz -O android-sdk.tgz
+RUN cd /opt && tar -xvzf android-sdk.tgz
+RUN cd /opt && rm -f android-sdk.tgz
+
+ENV ANDROID_HOME /opt/android-sdk-linux
+ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
 
 # Install Android SDK components
 
@@ -27,6 +28,13 @@ ENV GOOGLE_COMPONENTS extra-android-m2repository,extra-google-m2repository
 
 RUN echo y | android update sdk --no-ui --all --filter "${ANDROID_COMPONENTS}" ; \
     echo y | android update sdk --no-ui --all --filter "${GOOGLE_COMPONENTS}"
+
+COPY tools /opt/tools
+COPY licenses/android-sdk-license ${ANDROID_HOME}
+COPY licenses/android-sdk-preview-license ${ANDROID_HOME}
+ENV PATH ${PATH}:/opt/tools
+
+RUN apt-get clean
 
 # Support Gradle
 ENV TERM dumb

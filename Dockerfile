@@ -30,3 +30,8 @@ RUN echo y | android update sdk --no-ui --all --filter "${ANDROID_COMPONENTS}" ;
 
 # Support Gradle
 ENV TERM dumb
+
+RUN apt-get clean
+
+RUN chown -R 1000:1000 $ANDROID_HOME
+VOLUME ["/opt/android-sdk-linux"]

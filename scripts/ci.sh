@@ -22,4 +22,4 @@ echo "!!!!CI BEGIN!!!!!"
 export ANDROID_HOME="/usr/local/android-sdk-linux"
 
 echo android home = $ANDROID_HOME
-./gradlew test
+./gradlew test --stacktrace

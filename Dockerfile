@@ -29,9 +29,9 @@ ENV GOOGLE_COMPONENTS extra-android-m2repository,extra-google-m2repository
 RUN echo y | android update sdk --no-ui --all --filter "${ANDROID_COMPONENTS}" ; \
     echo y | android update sdk --no-ui --all --filter "${GOOGLE_COMPONENTS}"
 
-COPY android-sdk-linux /opt/android-sdk-linux
-COPY licenses/android-sdk-license ${ANDROID_HOME}
-COPY licenses/android-sdk-preview-license ${ANDROID_HOME}
+#COPY android-sdk-linux /opt/android-sdk-linux
+#COPY licenses/android-sdk-license ${ANDROID_HOME}
+#COPY licenses/android-sdk-preview-license ${ANDROID_HOME}
 ENV PATH ${PATH}:/opt/tools
 
 RUN apt-get clean

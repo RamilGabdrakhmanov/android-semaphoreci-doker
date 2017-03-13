@@ -1,7 +1,8 @@
 apply plugin: 'com.android.application'
-apply plugin: 'me.tatarka.retrolambda'
-apply plugin: 'robolectric'
 apply plugin: 'testfairy'
+apply plugin: 'robolectric'
+apply plugin: 'me.tatarka.retrolambda'
+
 
 android {
     compileSdkVersion COMPILE_SDK_VERSION

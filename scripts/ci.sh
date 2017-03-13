@@ -3,6 +3,5 @@
 # Fail immediately
 set -e
 
-cd app
+docker exec acl ./gradlew test
 
-./gradlew test

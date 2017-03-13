@@ -3,6 +3,5 @@
 # Fail immediately
 set -e
 
-cd app
+docker exec acl ./gradlew testfairyStagingRelease
 
-./gradlew -PtestfairyChangelog="$(git log -1 --pretty=%B)" testfairyStagingRelease

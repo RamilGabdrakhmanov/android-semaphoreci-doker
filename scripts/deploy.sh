@@ -3,12 +3,5 @@
 # Fail immediately
 set -e
 
-echo "!!!!DEPLOY BEGIN!!!!!"
-echo "!!!!DEPLOY BEGIN!!!!!"
-echo "!!!!DEPLOY BEGIN!!!!!"
-echo "!!!!DEPLOY BEGIN!!!!!"
-echo "!!!!DEPLOY BEGIN!!!!!"
-echo "!!!!DEPLOY BEGIN!!!!!"
-echo "!!!!DEPLOY BEGIN!!!!!"
+docker exec acl ./gradlew testfairyStagingRelease
 
-./gradlew testfairyStagingRelease

@@ -12,15 +12,9 @@ set -e
 
 # Build image and run
 docker build -t gfx/docker-android-project .
+echo "!!!!Build COMPLETE!!!!!!"
 docker run --tty --interactive --volume=$(pwd):/opt/workspace --workdir=/opt/workspace --name="acl" -d gfx/docker-android-project
-docker exec acl ls
-docker exec acl rm local.properties
-docker exec acl ls
+echo "!!!!RUN COMPLETE!!!!!!"
 docker exec acl ./gradlew tasks
 
-echo "!!!!RUN COMPLETE!!!!!!"
-echo "!!!!RUN COMPLETE!!!!!!"
-echo "!!!!RUN COMPLETE!!!!!!"
-echo "!!!!RUN COMPLETE!!!!!!"
-echo "!!!!RUN COMPLETE!!!!!!"
-echo "!!!!RUN COMPLETE!!!!!!"
+echo "!!!!exec COMPLETE!!!!!!"

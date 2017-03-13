@@ -3,5 +3,5 @@
 # Fail immediately
 set -e
 
-docker exec acl-container ./gradlew test
+docker exec android-container ./gradlew test
 

@@ -11,6 +11,6 @@ set -e
 
 
 # Build image and run
-docker build -t acl/image .
-docker run --tty --interactive --volume=$(pwd):/opt/workspace --workdir=/opt/workspace --name="acl-container" -d acl/image
-docker exec acl-container ./gradlew tasks
+docker build -t android/image .
+docker run --tty --interactive --volume=$(pwd):/opt/workspace --workdir=/opt/workspace --name="android-container" -d android/image
+docker exec android-container ./gradlew tasks

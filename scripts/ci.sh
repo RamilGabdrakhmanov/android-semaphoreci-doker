@@ -18,12 +18,8 @@ echo "!!!!CI BEGIN!!!!!"
 echo "!!!!CI BEGIN!!!!!"
 echo "!!!!CI BEGIN!!!!!"
 
-
-export ANDROID_HOME="/usr/local/android-sdk-linux"
-
-echo android home = $ANDROID_HOME
-cd $ANDROID_HOME
-ls -a
+docker exec acl ./gradlew test
 
 
-./gradlew test --stacktrace
+echo "!!!!CI COMPLETE!!!!!"
+

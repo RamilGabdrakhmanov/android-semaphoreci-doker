@@ -3,5 +3,5 @@
 # Fail immediately
 set -e
 
-docker exec acl ./gradlew testfairyStagingRelease
+docker exec android-container ./gradlew testfairyStagingRelease
 

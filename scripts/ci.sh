@@ -4,4 +4,3 @@
 set -e
 
 docker exec android-container ./gradlew test
-

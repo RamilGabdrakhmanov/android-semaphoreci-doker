@@ -11,6 +11,5 @@ set -e
 
 
 # Build image and run
-docker build -t android/image .
+docker build -t android/image --file ./docker/Dockerfile.test .
 docker run --tty --interactive --volume=$(pwd):/opt/workspace --workdir=/opt/workspace --name="android-container" -d android/image
-docker exec android-container ./gradlew tasks
